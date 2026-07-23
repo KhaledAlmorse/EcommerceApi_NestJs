@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket.IO Client</title>
+
+    <script src="https://cdn.socket.io/4.3.2/socket.io.min.js"></script>
+
+    <script>
+      // Establish socket connection
+      const socket = io("http://localhost:3000",{
+        auth:{accessToken:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjZhNTRlYmQ1NTcwN2M0OWM5OGQ3OTE4NyIsImVtYWlsIjoia2hhbGVkbWFuZWE3MkBnbWFpbC5jb20iLCJpYXQiOjE3ODQ1NzE4NjMsImV4cCI6MTc4NDU4OTg2MywianRpIjoiOTQ1YWJhNTktNWVlMy00MTM4LWE2YzktMTIzNTlkNWY4YzNhIn0.MsiuNd6JSxhOdcHhufNTr_nQ6Hq5NF9nbVlEAUMbISk"}
+      
+      });
+
+      socket.on('product_stock_update', (data) => {
+        console.log(data);
+      })
+
+    </script>
+  </head>
+
+  <body></body>
+</html>
