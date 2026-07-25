@@ -5,7 +5,7 @@ import { Product } from './product.model';
 
 @Schema()
 export class Cart {
-  @Prop({ type: Types.ObjectId, ref: User.name })
+  @Prop({ type: Types.ObjectId, ref: User.name, required: true })
   userId: Types.ObjectId;
 
   @Prop({

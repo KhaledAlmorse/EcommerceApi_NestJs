@@ -25,29 +25,13 @@ export class AuthGuard implements CanActivate {
         throw new UnauthorizedException('No token provided, please Login ');
       }
 
-      const decoded = this.tokenService.verify(token, {
-        secret: process.env.ACCESS_TOKEN_SECRET as string,
-      });
-
-      const isTokenRevoked = await this.revokeTokenRepository.findOne({
-        filters: { tokenId: decoded.jti },
-      });
-
-      if (isTokenRevoked) {
-        throw new UnauthorizedException('Token has been revoked');
-      }
-
-      const { id } = decoded as { id: string };
-      const user = await this.userRepository.findOne({ filters: { _id: id } });
-      if (!user) {
-        throw new NotFoundException('User not found, please Login ');
-      }
+      const { user, decoded } =
+        await this.tokenService.ValidateAndVerifyToken(token);
 
       request.user = { user, token: decoded };
+      request.accessToken = decoded;
       return true;
     } catch (error) {
-      console.log(error);
-
       throw new InternalServerErrorException('Invalid token, please Login ');
     }
   }

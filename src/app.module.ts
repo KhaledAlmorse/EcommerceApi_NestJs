@@ -9,6 +9,7 @@ import { GlobalAuthModule } from './global.module';
 import { CartModule } from './cart/cart.module';
 import { SubCategoryModule } from './sub-category/sub-category.module';
 import { BrandModule } from './brand/brand.module';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { BrandModule } from './brand/brand.module';
     CartModule,
     SubCategoryModule,
     BrandModule,
+    OrderModule,
   ],
   controllers: [AppController],
   providers: [AppService],

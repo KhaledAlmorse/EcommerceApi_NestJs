@@ -2,20 +2,37 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { ExpressAdapter } from '@nestjs/platform-express';
 import { ValidationPipe } from '@nestjs/common/pipes/validation.pipe';
-import { RequestQueryParser } from './Common/Middleware/query-parse.middleware';
+import express from 'express';
+import { AppModule } from '../src/app.module';
+import { RequestQueryParser } from '../src/Common/Middleware/query-parse.middleware';
 
-async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
-    }),
-  );
-  app.use(RequestQueryParser);
-  await app.listen(process.env.PORT ?? 3000);
+const server = express();
+let appInitialized = false;
+
+async function bootstrapServer() {
+  if (!appInitialized) {
+    const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
+
+    app.useGlobalPipes(
+      new ValidationPipe({
+        whitelist: true,
+        forbidNonWhitelisted: true,
+        transform: true,
+      }),
+    );
+
+    app.use(RequestQueryParser);
+    app.enableCors();
+
+    await app.init();
+    appInitialized = true;
+  }
+  return server;
 }
-bootstrap();
+
+export default async (req: any, res: any) => {
+  const server = await bootstrapServer();
+  server(req, res);
+};

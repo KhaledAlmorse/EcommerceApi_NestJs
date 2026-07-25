@@ -135,6 +135,7 @@ export class CartService {
     const userId = authUser.user._id;
     const userCart = await this.cartRespository.findOne({
       filters: { userId },
+      select: 'products subTotal',
     });
     if (!userCart) {
       throw new NotFoundException('Cart not found');

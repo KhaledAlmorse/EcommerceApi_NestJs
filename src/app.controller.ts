@@ -9,4 +9,14 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('success')
+  StripeSuccessUrl() {
+    return this.appService.StripeSuccessUrl();
+  }
+
+  @Get('cancel')
+  StripeCancelUrl() {
+    return this.appService.StripeCancelUrl();
+  }
 }
