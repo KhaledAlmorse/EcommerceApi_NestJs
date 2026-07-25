@@ -13,7 +13,13 @@ let appInitialized = false;
 
 async function bootstrapServer() {
   if (!appInitialized) {
-    const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
+    const app = await NestFactory.create(
+      AppModule,
+      new ExpressAdapter(server),
+      {
+        rawBody: true,
+      },
+    );
 
     app.useGlobalPipes(
       new ValidationPipe({

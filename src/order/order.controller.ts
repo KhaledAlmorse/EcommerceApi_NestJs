@@ -10,10 +10,11 @@ import {
   Res,
   HttpStatus,
   Headers,
+  RawBodyRequest,
 } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/order.dto';
-import type { Request, Response } from 'express';
+import * as express from 'express';
 import { Auth, AuthUser } from '../Common/Decorators';
 import { RolesEnum, type IAuthUser } from '../Common/Types';
 import { Types } from 'mongoose';
@@ -26,7 +27,7 @@ export class OrderController {
   @Auth(RolesEnum.USER)
   async createOrderHandler(
     @Body() body: CreateOrderDto,
-    @Res() res: Response,
+    @Res() res: express.Response,
     @AuthUser() user: IAuthUser,
   ) {
     const result = await this.orderService.CreateOrderService(user, body);
@@ -40,7 +41,7 @@ export class OrderController {
   @Auth(RolesEnum.USER)
   async payWithStripeHandler(
     @Body() body: { orderId: Types.ObjectId },
-    @Res() res: Response,
+    @Res() res: express.Response,
     @AuthUser() user: IAuthUser,
   ) {
     const result = await this.orderService.PayWithStripe(body.orderId, user);
@@ -52,9 +53,11 @@ export class OrderController {
 
   @Post('webhook')
   async handleWebhook(
+    @Req() req: any,
     @Body() data: any,
     @Headers('stripe-signature') sig?: string,
   ) {
-    return await this.orderService.handleWebhook(data, sig);
+    const payload = req?.rawBody || data;
+    return await this.orderService.handleWebhook(payload, sig);
   }
 }

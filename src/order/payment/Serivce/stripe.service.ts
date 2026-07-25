@@ -42,10 +42,17 @@ export class StripeService {
   constructEvent(data: any, sig?: string): Stripe.Event {
     const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
     if (webhookSecret && sig) {
-      return this.stripe.webhooks.constructEvent(data, sig, webhookSecret);
+      const payload =
+        Buffer.isBuffer(data) || typeof data === 'string'
+          ? data
+          : JSON.stringify(data);
+      return this.stripe.webhooks.constructEvent(payload, sig, webhookSecret);
     }
     if (typeof data === 'string') {
       return JSON.parse(data) as Stripe.Event;
+    }
+    if (Buffer.isBuffer(data)) {
+      return JSON.parse(data.toString('utf8')) as Stripe.Event;
     }
     return data as Stripe.Event;
   }
