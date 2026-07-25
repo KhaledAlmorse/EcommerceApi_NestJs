@@ -9,6 +9,7 @@ import {
   Req,
   Res,
   HttpStatus,
+  Headers,
 } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/order.dto';
@@ -47,5 +48,13 @@ export class OrderController {
       success: true,
       result,
     });
+  }
+
+  @Post('webhook')
+  async handleWebhook(
+    @Body() data: any,
+    @Headers('stripe-signature') sig?: string,
+  ) {
+    return await this.orderService.handleWebhook(data, sig);
   }
 }

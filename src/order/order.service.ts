@@ -6,10 +6,13 @@ import { OrderStatus, type IAuthUser } from '../Common/Types';
 import { Types } from 'mongoose';
 import { StripeService } from './payment/Serivce';
 
+import Stripe from 'stripe';
+
 @Injectable()
 export class OrderService {
   constructor(
     private readonly cartService: CartService,
+    private readonly cartRepository: CartRepository,
     private readonly orderRespository: OrderRepository,
     private readonly stripeService: StripeService,
   ) {}
@@ -91,5 +94,48 @@ export class OrderService {
       line_items,
       discounts: [{ coupon: coupon.id }],
     });
+  }
+
+  async handleWebhook(data: any, sig?: string) {
+    const event = this.stripeService.constructEvent(data, sig);
+
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object;
+      const orderId = session.metadata?.orderId;
+
+      if (orderId) {
+        const order = await this.orderRespository.update({
+          filters: { _id: new Types.ObjectId(orderId) },
+          body: {
+            orderStatus: OrderStatus.PLACED,
+            'orderChanges.paidAt': new Date(),
+          },
+        });
+
+        if (order && order.cartId) {
+          await this.cartRepository.update({
+            filters: { _id: order.cartId },
+            body: { products: [] },
+          });
+        }
+      }
+    }
+
+    if (event.type === 'checkout.session.async_payment_failed') {
+      const session = event.data.object;
+      const orderId = session.metadata?.orderId;
+
+      if (orderId) {
+        await this.orderRespository.update({
+          filters: { _id: new Types.ObjectId(orderId) },
+          body: {
+            orderStatus: OrderStatus.CANCELED,
+            'orderChanges.cancelledAt': new Date(),
+          },
+        });
+      }
+    }
+
+    return { status: 'success' };
   }
 }

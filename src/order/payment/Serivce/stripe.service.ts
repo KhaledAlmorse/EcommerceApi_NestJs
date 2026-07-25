@@ -12,6 +12,9 @@ export class StripeService {
     line_items,
     discounts = [],
   }: Stripe.Checkout.SessionCreateParams) {
+    const baseUrl =
+      process.env.APP_URL ||
+      'https://ecommerce-api-nest-mcq9wuf79-khaledalmorses-projects.vercel.app';
     return this.stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
@@ -19,8 +22,8 @@ export class StripeService {
       metadata,
       line_items,
       discounts,
-      success_url: 'http://localhost:3000/success',
-      cancel_url: 'http://localhost:3000/cancel',
+      success_url: `${baseUrl}/success`,
+      cancel_url: `${baseUrl}/cancel`,
     });
   }
 
@@ -34,5 +37,16 @@ export class StripeService {
       currency,
       percent_off,
     });
+  }
+
+  constructEvent(data: any, sig?: string): Stripe.Event {
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+    if (webhookSecret && sig) {
+      return this.stripe.webhooks.constructEvent(data, sig, webhookSecret);
+    }
+    if (typeof data === 'string') {
+      return JSON.parse(data) as Stripe.Event;
+    }
+    return data as Stripe.Event;
   }
 }
