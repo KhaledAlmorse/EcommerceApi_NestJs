@@ -14,7 +14,7 @@ import { ConfirmEmailDto, loginBodyDto, singupBodyDto } from './dto/auth.dto';
 import { Events } from '../Common/Utils';
 import { CompareHash, Hash } from '../Common/Security';
 import { TokenService } from '../Common/Services';
-import { v4 as uuidv4 } from 'uuid';
+import { randomUUID } from 'crypto';
 import type { StringValue } from 'ms';
 import { IAuthUser, OtpTypeEnum } from '../Common/Types';
 
@@ -84,13 +84,13 @@ export class AuthService {
     const accessToken = this.tokenService.generate(tokenPayload, {
       secret: process.env.ACCESS_TOKEN_SECRET,
       expiresIn: process.env.ACCESS_TOKEN_EXPIRES_IN as StringValue,
-      jwtid: uuidv4(),
+      jwtid: randomUUID(),
     });
 
     const refreshToken = this.tokenService.generate(tokenPayload, {
       secret: process.env.REFRESH_TOKEN_SECRET,
       expiresIn: process.env.REFRESH_EXPIRES_IN as StringValue,
-      jwtid: uuidv4(),
+      jwtid: randomUUID(),
     });
     return { accessToken, refreshToken };
   }
