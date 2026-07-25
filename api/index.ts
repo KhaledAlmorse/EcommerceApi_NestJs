@@ -13,9 +13,13 @@ let appInitialized = false;
 
 async function bootstrapServer() {
   if (!appInitialized) {
-    const app = await NestFactory.create(AppModule, new ExpressAdapter(server), {
-      rawBody: true,
-    });
+    const app = await NestFactory.create(
+      AppModule,
+      new ExpressAdapter(server),
+      {
+        rawBody: true,
+      },
+    );
 
     app.useGlobalPipes(
       new ValidationPipe({
@@ -33,6 +37,12 @@ async function bootstrapServer() {
   }
   return server;
 }
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 export default async (req: any, res: any) => {
   const server = await bootstrapServer();
