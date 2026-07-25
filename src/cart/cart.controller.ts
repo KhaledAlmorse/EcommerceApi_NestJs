@@ -10,8 +10,8 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { CartService } from './cart.service';
-import { Auth, AuthUser } from 'src/Common/Decorators';
-import type { IAuthUser } from 'src/Common/Types';
+import { Auth, AuthUser } from '../Common/Decorators';
+import type { IAuthUser } from '../Common/Types';
 import { AddToCartDto } from './dto/cart.dto';
 import type { Response } from 'express';
 

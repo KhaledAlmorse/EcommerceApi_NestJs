@@ -3,7 +3,7 @@ import { BaseService } from '../base.service';
 import { Order, type OrderType } from '../Models/order.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
-import { OrderStatus, PaymentMethod } from 'src/Common/Types';
+import { OrderStatus, PaymentMethod } from '../../Common/Types';
 
 @Injectable()
 export class OrderRepository extends BaseService<OrderType> {

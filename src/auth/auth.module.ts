@@ -5,12 +5,12 @@ import {
   OtpRepository,
   RevokeTokenRepository,
   UserRepository,
-} from 'src/DB/Repositories';
+} from '../DB/Repositories';
 import { UserModel } from '../DB/Models/user.model';
-import { TokenService } from 'src/Common/Services';
+import { TokenService } from '../Common/Services';
 import { JwtService } from '@nestjs/jwt';
-import { OtpModel } from 'src/DB/Models/otp.model';
-import { RevokeTokenModel } from 'src/DB/Models';
+import { OtpModel } from '../DB/Models/otp.model';
+import { RevokeTokenModel } from '../DB/Models';
 
 @Module({
   imports: [UserModel, OtpModel, RevokeTokenModel],

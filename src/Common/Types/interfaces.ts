@@ -1,4 +1,4 @@
-import { UserType } from 'src/DB/Models';
+import { UserType } from '../../DB/Models';
 
 export interface IAuthUser {
   user: UserType;

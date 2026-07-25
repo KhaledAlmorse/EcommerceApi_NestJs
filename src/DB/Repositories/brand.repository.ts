@@ -3,7 +3,7 @@ import { BaseService } from '../base.service';
 import { Brand, type BrandType } from '../Models/brand.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { UploadCloudFileService } from 'src/Common/Services';
+import { UploadCloudFileService } from '../../Common/Services';
 
 @Injectable()
 export class BrandRepository extends BaseService<BrandType> {

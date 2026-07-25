@@ -13,8 +13,8 @@ import {
 import { OrderService } from './order.service';
 import { CreateOrderDto } from './dto/order.dto';
 import type { Request, Response } from 'express';
-import { Auth, AuthUser } from 'src/Common/Decorators';
-import { RolesEnum, type IAuthUser } from 'src/Common/Types';
+import { Auth, AuthUser } from '../Common/Decorators';
+import { RolesEnum, type IAuthUser } from '../Common/Types';
 import { Types } from 'mongoose';
 
 @Controller('order')

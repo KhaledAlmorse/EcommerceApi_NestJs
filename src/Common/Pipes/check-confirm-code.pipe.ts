@@ -3,7 +3,7 @@ import {
   NotAcceptableException,
   PipeTransform,
 } from '@nestjs/common';
-import { CreateProductDto } from 'src/products/dto/create-product-dto';
+import { CreateProductDto } from '../../products/dto/create-product-dto';
 
 @Injectable()
 export class CheckConfirmCodePipe implements PipeTransform {

@@ -15,11 +15,11 @@ import {
 import { AuthService } from './auth.service';
 import { type Request, type Response } from 'express';
 import { singupBodyDto, loginBodyDto, ConfirmEmailDto } from './dto/auth.dto';
-import { AuthGuard, RolesGuard } from 'src/Common/Guards';
-import { Auth, AuthUser, Roles } from 'src/Common/Decorators';
-import { type UserType } from 'src/DB/Models';
-import { type IAuthUser } from 'src/Common/Types';
-import { performanceInterceptor } from 'src/Common/Interceptors/performance.interceptors';
+import { AuthGuard, RolesGuard } from '../Common/Guards';
+import { Auth, AuthUser, Roles } from '../Common/Decorators';
+import { type UserType } from '../DB/Models';
+import { type IAuthUser } from '../Common/Types';
+import { performanceInterceptor } from '../Common/Interceptors/performance.interceptors';
 
 @Controller('auth')
 export class AuthController {

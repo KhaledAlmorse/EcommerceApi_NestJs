@@ -16,12 +16,12 @@ import {
 import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { Auth, AuthUser } from 'src/Common/Decorators';
-import type { IAuthUser } from 'src/Common/Types';
+import { Auth, AuthUser } from '../Common/Decorators';
+import type { IAuthUser } from '../Common/Types';
 import type { Response, Express } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { uploadFileOptions } from 'src/Common/Utils';
-import { ImagesExtensions } from 'src/Common/Constants/constants';
+import { uploadFileOptions } from '../Common/Utils';
+import { ImagesExtensions } from '../Common/Constants/constants';
 
 @Controller('category')
 export class CategoryController {

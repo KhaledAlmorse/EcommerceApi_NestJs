@@ -3,8 +3,8 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { IAuthUser } from 'src/Common/Types';
-import { CartRepository, ProductRepository } from 'src/DB/Repositories';
+import { IAuthUser } from '../Common/Types';
+import { CartRepository, ProductRepository } from '../DB/Repositories';
 import { AddToCartDto } from './dto/cart.dto';
 import { Types } from 'mongoose';
 

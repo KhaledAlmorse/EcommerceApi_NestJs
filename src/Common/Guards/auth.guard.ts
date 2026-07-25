@@ -7,7 +7,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { TokenService } from '../Services';
-import { RevokeTokenRepository, UserRepository } from 'src/DB/Repositories';
+import { RevokeTokenRepository, UserRepository } from '../../DB/Repositories';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { CategoryService } from './category.service';
 import { CategoryController } from './category.controller';
-import { CategoryRepository, ProductRepository } from 'src/DB/Repositories';
+import { CategoryRepository, ProductRepository } from '../DB/Repositories';
 import {
   CategoryModel,
   ProductModel,
   SubCategoryModel,
   BrandModel,
-} from 'src/DB/Models';
-import { UploadCloudFileService } from 'src/Common/Services';
+} from '../DB/Models';
+import { UploadCloudFileService } from '../Common/Services';
 
 @Module({
   imports: [CategoryModel, ProductModel, SubCategoryModel, BrandModel],

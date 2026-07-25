@@ -5,10 +5,10 @@ import {
 } from '@nestjs/common';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
-import { CategoryRepository } from 'src/DB/Repositories';
-import { IAuthUser } from 'src/Common/Types';
+import { CategoryRepository } from '../DB/Repositories';
+import { IAuthUser } from '../Common/Types';
 import slugify from 'slugify';
-import { UploadCloudFileService } from 'src/Common/Services';
+import { UploadCloudFileService } from '../Common/Services';
 
 @Injectable()
 export class CategoryService {

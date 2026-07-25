@@ -9,14 +9,14 @@ import {
   OtpRepository,
   RevokeTokenRepository,
   UserRepository,
-} from 'src/DB/Repositories';
+} from '../DB/Repositories';
 import { ConfirmEmailDto, loginBodyDto, singupBodyDto } from './dto/auth.dto';
-import { Events } from 'src/Common/Utils';
-import { CompareHash, Hash } from 'src/Common/Security';
-import { TokenService } from 'src/Common/Services';
+import { Events } from '../Common/Utils';
+import { CompareHash, Hash } from '../Common/Security';
+import { TokenService } from '../Common/Services';
 import { v4 as uuidv4 } from 'uuid';
 import type { StringValue } from 'ms';
-import { IAuthUser, OtpTypeEnum } from 'src/Common/Types';
+import { IAuthUser, OtpTypeEnum } from '../Common/Types';
 
 @Injectable()
 export class AuthService {

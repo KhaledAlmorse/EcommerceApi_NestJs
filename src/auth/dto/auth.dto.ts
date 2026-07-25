@@ -12,7 +12,7 @@ import {
   Min,
   MinLength,
 } from 'class-validator';
-import { GenderEnum, RolesEnum } from 'src/Common/Types';
+import { GenderEnum, RolesEnum } from '../../Common/Types';
 export class singupBodyDto {
   @IsString()
   @IsNotEmpty()

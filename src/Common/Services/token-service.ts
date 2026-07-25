@@ -6,7 +6,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService, JwtSignOptions, JwtVerifyOptions } from '@nestjs/jwt';
-import { RevokeTokenRepository, UserRepository } from 'src/DB/Repositories';
+import { RevokeTokenRepository, UserRepository } from '../../DB/Repositories';
 
 @Injectable()
 export class TokenService {

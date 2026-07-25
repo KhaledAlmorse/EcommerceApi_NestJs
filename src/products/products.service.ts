@@ -8,11 +8,11 @@ import {
   CreateProductDto,
   listProductQueryDto,
 } from './dto/create-product-dto';
-import { ProductRepository, CategoryRepository } from 'src/DB/Repositories';
-import type { IAuthUser } from 'src/Common/Types';
-import { CategoryService } from 'src/category/category.service';
-import { UploadCloudFileService } from 'src/Common/Services';
-import { ProductType } from 'src/DB/Models';
+import { ProductRepository, CategoryRepository } from '../DB/Repositories';
+import type { IAuthUser } from '../Common/Types';
+import { CategoryService } from '../category/category.service';
+import { UploadCloudFileService } from '../Common/Services';
+import { ProductType } from '../DB/Models';
 import { Types } from 'mongoose';
 import { filter } from 'rxjs';
 

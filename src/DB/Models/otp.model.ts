@@ -1,7 +1,7 @@
 import { MongooseModule, Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, HydratedDocument, Types } from 'mongoose';
 import { User } from './user.model';
-import { OtpTypeEnum } from 'src/Common/Types';
+import { OtpTypeEnum } from '../../Common/Types';
 
 @Schema({ timestamps: true })
 export class Otp {

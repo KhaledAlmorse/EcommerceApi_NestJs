@@ -1,5 +1,5 @@
 import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { PaymentMethod } from 'src/Common/Types';
+import { PaymentMethod } from '../../Common/Types';
 
 export class CreateOrderDto {
   @IsString()

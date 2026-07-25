@@ -3,7 +3,7 @@ import { BaseService } from '../base.service';
 import { Product, type ProductType } from '../Models/product.model';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { RealTimeGetway } from 'src/Common/Getways/webSocket.getway';
+import { RealTimeGetway } from '../../Common/Getways/webSocket.getway';
 
 @Injectable()
 export class ProductRepository extends BaseService<ProductType> {

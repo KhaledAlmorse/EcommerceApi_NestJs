@@ -7,7 +7,7 @@ import { Product, ProductType } from '../Models';
 import { ProductRepository } from './product.repository';
 import { SubCategory, SubCategoryType } from '../Models/sub-category.model';
 import { Brand, BrandType } from '../Models/brand.model';
-import { UploadCloudFileService } from 'src/Common/Services';
+import { UploadCloudFileService } from '../../Common/Services';
 
 @Injectable()
 export class CategoryRepository extends BaseService<CategoryType> {

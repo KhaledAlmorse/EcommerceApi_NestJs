@@ -21,11 +21,11 @@ import {
   listProductQueryDto,
 } from './dto/create-product-dto';
 import { UpdateProductDto } from './dto/update-product-dto';
-import { Auth, AuthUser } from 'src/Common/Decorators';
+import { Auth, AuthUser } from '../Common/Decorators';
 import { FilesInterceptor } from '@nestjs/platform-express';
-import { uploadFileOptions } from 'src/Common/Utils';
-import { ImagesExtensions } from 'src/Common/Constants/constants';
-import type { IAuthUser } from 'src/Common/Types';
+import { uploadFileOptions } from '../Common/Utils';
+import { ImagesExtensions } from '../Common/Constants/constants';
+import type { IAuthUser } from '../Common/Types';
 import type { Request, Response } from 'express';
 
 @Controller('products')

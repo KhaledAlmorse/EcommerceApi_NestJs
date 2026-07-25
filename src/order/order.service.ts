@@ -1,8 +1,8 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateOrderDto } from './dto/order.dto';
-import { CartRepository, OrderRepository } from 'src/DB/Repositories';
-import { CartService } from 'src/cart/cart.service';
-import { OrderStatus, type IAuthUser } from 'src/Common/Types';
+import { CartRepository, OrderRepository } from '../DB/Repositories';
+import { CartService } from '../cart/cart.service';
+import { OrderStatus, type IAuthUser } from '../Common/Types';
 import { Types } from 'mongoose';
 import { StripeService } from './payment/Serivce';
 

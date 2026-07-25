@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { PaymentMethod } from 'src/Common/Types';
+import { PaymentMethod } from '../../../Common/Types';
 import Stripe, { CouponCreateParams } from 'stripe';
 
 @Injectable()

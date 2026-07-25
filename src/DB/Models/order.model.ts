@@ -2,7 +2,7 @@ import { MongooseModule, Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Document, Types } from 'mongoose';
 import { User } from './user.model';
 import { Cart } from './cart.model';
-import { OrderStatus, PaymentMethod } from 'src/Common/Types';
+import { OrderStatus, PaymentMethod } from '../../Common/Types';
 
 export type OrderType = HydratedDocument<Order> & Document;
 
