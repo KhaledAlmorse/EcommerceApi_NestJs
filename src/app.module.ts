@@ -10,6 +10,7 @@ import { CartModule } from './cart/cart.module';
 import { SubCategoryModule } from './sub-category/sub-category.module';
 import { BrandModule } from './brand/brand.module';
 import { OrderModule } from './order/order.module';
+import { CoreModule } from './Core/core.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { OrderModule } from './order/order.module';
     SubCategoryModule,
     BrandModule,
     OrderModule,
+    CoreModule,
   ],
   controllers: [AppController],
   providers: [AppService],

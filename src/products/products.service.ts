@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  Inject,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -15,6 +16,7 @@ import { UploadCloudFileService } from '../Common/Services';
 import { ProductType } from '../DB/Models';
 import { Types } from 'mongoose';
 import { filter } from 'rxjs';
+import type { Cache } from 'cache-manager';
 
 @Injectable()
 export class ProductsService {
@@ -22,6 +24,7 @@ export class ProductsService {
     private readonly productRepository: ProductRepository,
     private readonly CategoryService: CategoryService,
     private readonly uploadCloudFileService: UploadCloudFileService,
+    @Inject('CACHE_MANAGER') private readonly cacheManager: Cache,
   ) {}
 
   async createProduct(
@@ -72,18 +75,24 @@ export class ProductsService {
     return newProduct;
   }
 
+  async buildProductList() {
+    const products = await this.productRepository.findMany({
+      filters: {},
+    });
+    const data = await this.cacheManager.set('list_products', products);
+
+    return data;
+  }
+
   async findAllProducts(query: listProductQueryDto) {
     const { limit = 10, page = 1, sort, ...filters } = query;
     //{price:{lt:50,gt:40}}
     //{price:{$lt:50,$gt:40}}
-
     const filterString = JSON.stringify(filters).replace(
       /\b(lt|gt|lte|gte)\b/g,
       (match) => `$${match}`,
     );
-
     const filterObj = JSON.parse(filterString);
-
     const skip = (page - 1) * limit;
     const options = {
       limit,
@@ -91,11 +100,16 @@ export class ProductsService {
       sort: sort,
       filters: filterObj,
     };
-
     const resutl = await this.productRepository.findMany(options);
     if (!resutl) throw new BadRequestException('Failed to find products');
     const count = resutl.length;
     return { count, resutl };
+    //* Get data from cache
+    // const products = await this.cacheManager.get('list_products');
+    // if (!products) {
+    //   throw new NotFoundException('Products not found');
+    // }
+    // return products;
   }
 
   async findProduct(id: string) {

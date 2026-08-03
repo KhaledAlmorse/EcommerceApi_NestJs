@@ -60,6 +60,12 @@ export class ProductsController {
     res.status(HttpStatus.OK).json(result);
   }
 
+  @Get('build-list')
+  async buildProductListHandler(@Res() res: Response) {
+    const result = await this.productServices.buildProductList();
+    res.status(HttpStatus.OK).json(result);
+  }
+
   @Get('/:id')
   async getSingleProductHandler(@Param('id') id: string, @Res() res: Response) {
     const result = await this.productServices.findProduct(id);
