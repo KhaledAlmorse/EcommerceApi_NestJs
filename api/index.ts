@@ -30,7 +30,11 @@ async function bootstrapServer() {
     );
 
     app.use(RequestQueryParser);
-    app.enableCors();
+    app.enableCors({
+      origin: '*',
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+      allowedHeaders: 'Content-Type, Accept, Authorization',
+    });
 
     await app.init();
     appInitialized = true;

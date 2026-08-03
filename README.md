@@ -30,6 +30,8 @@ This project is a high-performance **E-Commerce Backend API** built using **Nest
 - 🔐 **Authentication & Security**
   - JWT-based authentication & token validation
   - Custom Role-Based Access Control (RBAC) (e.g. `@Auth('admin')`)
+  - Rate Limiting protection via `@nestjs/throttler` (100 requests / 60 seconds per IP)
+  - Configured Cross-Origin Resource Sharing (CORS `*`) for frontend client integration
   - Password hashing with `bcrypt`
 
 - 🛍️ **Product Catalog & Management**
